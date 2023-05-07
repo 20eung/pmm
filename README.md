@@ -37,21 +37,22 @@ services:
     environment:
       - TZ=Asia/Seoul
       - PLEX_MEDIA_SERVER_USER=plex
-      - PUID=1002
-      - PGID=1003
+      - PUID=1001
+      - PGID=1001
     volumes:
       - /etc/timezone:/etc/timezone
       - ./config:/config
 ```
 
-PUID, PGID는 plex-media-server 실행할 ID의 것을 사용합니다.
+PUID, PGID는 Plex Meta Manager를 실행할 User ID를 사용합니다.
 
 리눅스 쉘에서 id 입력하면 uid와 gid를 알아낼 수 있습니다.
 
 ```
 ubuntu@:/data$ id
 uid=1001(ubuntu) gid=1001(ubuntu) 
-groups=1001(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),119(netdev),120(lxd),999(docker)
+groups=1001(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),
+44(video),46(plugdev),119(netdev),120(lxd),999(docker)
 ```
 
 # config.movie.all.yml
@@ -201,7 +202,7 @@ plex:
 
 ## Required
 tmdb:                                   # REQUIRED for the script to run
-  apikey: 9cea8d49d95
+  apikey: 9cea8d49d95~~~
   language: ko                          # ISO 639-1 Code of the User Language
   region: KR                            # ISO 3166-1 Code of the User Region for Searches
   cache_expiration: 60                  # Number of days
