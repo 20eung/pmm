@@ -69,6 +69,13 @@ groups=1001(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),3
 
   - 앞 부분이 URL이고, 마지막 부분이 Token 입니다.
 
+<img src=./images/xml.png>
+
+<img src=./images/url.png>
+
+<img src=./images/token.png>
+
+
 - tmdb apikey : tmdb 회원 가입 후 새성할 수 있습니다.
 
 
