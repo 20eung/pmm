@@ -143,6 +143,7 @@ libraries:
       mass_originally_available_update: tmdb
       mass_imdb_parental_labels: without_none
 
+
   1.3 영화(한국):
     overlay_path:
     - remove_overlays: false
@@ -170,6 +171,7 @@ libraries:
       mass_content_rating_update: mdb_commonsense
       mass_originally_available_update: tmdb
       mass_imdb_parental_labels: without_none
+
 
 settings:
   asset_depth: 0                        # 0 or any integer
@@ -233,6 +235,7 @@ mdblist:
   apikey: cr8rn5~~~
   cache_expiration: 60
 
+
 trakt:
   client_id: 3d8bc~~~~
   client_secret: 268f~~~~
@@ -251,7 +254,7 @@ trakt:
 
 pmm 은 지정된 시간에 매일같이 라이브러리 정보를 업데이트합니다.
 
-수동으로 하기 위한 스크립트입니다.
+수동으로 업데이트하기 위한 스크립트입니다.
 
 ```
 #!/bin/sh
