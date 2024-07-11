@@ -26,46 +26,38 @@ Plex Meta Manager Configuration
 # docker-compose.yml
 
 ```
-version: "2.1"
 services:
-  plex-meta-manager:
-    image: meisnate12/plex-meta-manager:latest
-    container_name: plex-meta-manager
+  kometa:
+    image: kometateam/kometa
+    container_name: pmm
     hostname: pmm
     restart: unless-stopped
-    network_mode: host
+    stdin_open: true
+    tty: true
     environment:
       - TZ=Asia/Seoul
-      - PLEX_MEDIA_SERVER_USER=plex
-      - PUID=1001
-      - PGID=1001
+      - KOMETA_RUN=true
+      - KOMETA_DEBUG=true
+      - KOMETA_LOG_REQUESTS=true
+      - KOMETA_CONFIG=/config/config.yml
+      - KOMETA_OVERLAYS_ONLY=true
+      - KOMETA_RUN=true
     volumes:
-      - /etc/timezone:/etc/timezone
       - ./config:/config
 ```
 
-PUID, PGID는 Plex Meta Manager를 실행할 User ID를 사용합니다.
-
-리눅스 쉘에서 id 입력하면 uid와 gid를 알아낼 수 있습니다.
-
-```
-ubuntu@:/data$ id
-uid=1001(ubuntu) gid=1001(ubuntu) 
-groups=1001(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),
-44(video),46(plugdev),119(netdev),120(lxd),999(docker)
-```
 
 # config.yml
 
 > 설명:
 
-- config 예제 : https://metamanager.wiki/en/latest/defaults/guide.html
+- config 예제 : [https://metamanager.wiki/en/latest/defaults/guide.html](https://metamanager.wiki/en/latest/defaults/guide/)
 
 - 1.1 영화(최근추가) : Plex에서 생성한 라이브러리명과 동일하게 사용합니다. 띄어쓰기까지 동일하게
 
 - plex url/token : Plex 서버를 웹으로 접속한 후 확인할 수 있습니다.
 
-  - 영상을 선택한 후 ... 눌러 미디어 정보를 클릭한 후 XML 보기를 누르면 새 창이 나옵니다.
+  - 영상을 선택한 후 --> ... 눌러 미디어 정보를 클릭한 후 --> XML 보기를 누르면 새 창이 나옵니다.
 
   - 앞 부분이 URL이고, 마지막 부분이 Token 입니다.
 
@@ -87,93 +79,104 @@ groups=1001(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),3
 ## Required
 libraries:
   1.1 영화(최근추가):
-    overlay_path:
-    - remove_overlays: false
-    - reapply_overlay: true
-    - pmm: commonsense
-    - pmm: resolution
-    - pmm: ribbon
-    - pmm: streaming
-    - pmm: ratings
-      template_variables:
-        horizontal_position: right
-        rating1: critic
-        rating1_image: imdb
-        rating2: audience
-        rating2_image: tmdb
+#   schedule_overlays: weekly(sunday)
+    overlay_files:
+      - remove_overlays: false
+      - reapply_overlay: true
+      - default: commonsense
+      - default: resolution
+        template_variables:
+          use_dvhdrplus: false
+          use_dvhdr: false
+          use_plus: false
+          use_dv: false
+          use_hdr: false
+          use_576p: false
+          use_480p: false
+      - default: ribbon
+      - default: streaming
+      - default: ratings
+        template_variables:
+          rating1: user
+          rating1_image: rt_tomato
+          rating2: critic
+          rating2_image: imdb
+          rating3: audience
+          rating3_image: tmdb
+          horizontal_position: right
 
-    settings:
-      asset_directory:
-      - config/assets
-
-    operations:
-      mass_critic_rating_update: imdb
-      mass_audience_rating_update: tmdb
-      mass_genre_update: tmdb
-      mass_content_rating_update: mdb_commonsense
-      mass_originally_available_update: tmdb
-      mass_imdb_parental_labels: without_none
-
-      
   1.2 영화(외국):
-    overlay_path:
-    - remove_overlays: false
-    - reapply_overlay: true
-    - pmm: commonsense
-    - pmm: resolution
-    - pmm: ribbon
-    - pmm: streaming
-    - pmm: ratings
-      template_variables:
-        horizontal_position: right
-        rating1: critic
-        rating1_image: imdb
-        rating2: audience
-        rating2_image: tmdb
-
-    settings:
-      asset_directory:
-      - config/assets
-
-    operations:
-      mass_critic_rating_update: imdb
-      mass_audience_rating_update: tmdb
-      mass_genre_update: tmdb
-      mass_content_rating_update: mdb_commonsense
-      mass_originally_available_update: tmdb
-      mass_imdb_parental_labels: without_none
+#   schedule_overlays: weekly(sunday)
+    overlay_files:
+      - remove_overlays: false
+      - reapply_overlay: true
+      - default: commonsense
+      - default: resolution
+        template_variables:
+          use_dvhdrplus: false
+          use_dvhdr: false
+          use_plus: false
+          use_dv: false
+          use_hdr: false
+          use_576p: false
+          use_480p: false
+      - default: ribbon
+      - default: streaming
+      - default: ratings
+        template_variables:
+          rating1: user
+          rating1_image: rt_tomato
+          rating2: critic
+          rating2_image: imdb
+          rating3: audience
+          rating3_image: tmdb
+          horizontal_position: right
 
 
   1.3 영화(한국):
-    overlay_path:
-    - remove_overlays: false
-    - reapply_overlay: true
-    - pmm: commonsense
-    - pmm: resolution
-    - pmm: ribbon
-    - pmm: streaming
-    - pmm: ratings
-      template_variables:
-        horizontal_position: right
-        rating1: critic
-        rating1_image: imdb
-        rating2: audience
-        rating2_image: tmdb
+#   schedule_overlays: weekly(sunday)
+    overlay_files:
+      - remove_overlays: false
+      - reapply_overlay: true
+      - default: commonsense
+      - default: resolution
+        template_variables:
+          use_dvhdrplus: false
+          use_dvhdr: false
+          use_plus: false
+          use_dv: false
+          use_hdr: false
+          use_576p: false
+          use_480p: false
+      - default: ribbon
+      - default: streaming
+      - default: ratings
+        template_variables:
+          rating1: user
+          rating1_image: rt_tomato
+          rating2: critic
+          rating2_image: imdb
+          rating3: audience
+          rating3_image: tmdb
+          horizontal_position: right
 
-    settings:
-      asset_directory:
-      - config/assets
 
-    operations:
-      mass_critic_rating_update: imdb
-      mass_audience_rating_update: tmdb
-      mass_genre_update: tmdb
-      mass_content_rating_update: mdb_commonsense
-      mass_originally_available_update: tmdb
-      mass_imdb_parental_labels: without_none
-
-
+  operations:
+    mass_user_rating_update: mdb_tomatoes
+    mass_critic_rating_update: imdb
+    mass_audience_rating_update: tmdb
+    mass_genre_update: tmdb
+    mass_content_rating_update: mdb_commonsense
+    mass_originally_available_update: tmdb
+    mass_imdb_parental_labels: without_none
+        
 settings:
+  run_order:
+  - operations
+  - overlays
+  - metadata
+  - collections
+
   asset_depth: 0                        # 0 or any integer
   asset_directory:                      # any directory
   asset_folders: true                   # true or false
@@ -193,22 +196,24 @@ settings:
   minimum_items: 1                      # 1 or any integer
   missing_only_released: false          # false or true
   only_filter_missing: false            # false or true
+  overlay_artwork_filetype: jpg
+  overlay_artwork_quality: 100
   playlist_exclude_users:
   playlist_report: false                # false or true
   playlist_sync_to_user: all            # all, list of users, or comma-separated string of users
   prioritize_assets: false              # false or true
   run_again_delay: 0                    # 0 or any integer
+  save_report: false                    # false or true
   show_asset_not_needed: false          # true or false
   show_filtered: false                  # false or true
   show_missing: false                   # true or false
   show_missing_assets: false            # true or false
   show_missing_episode_assets: false    # false or true
   show_missing_season_assets: false     # false or true
-  sync_mode: append                     # append or sync
   show_options: false                   # false or true
-  save_report: false                    # false or true
   show_unconfigured: true               # false or true
   show_unmanaged: false                 # true or false
+  sync_mode: append                     # append or sync
   tvdb_language: kor                    # Any ISO 639-2 Language Code
   verify_ssl: true                      # true or false
 
@@ -218,11 +223,11 @@ plex:
   url: https://34-64-~~~.plex.direct:32400
   token: Ek4PJGxH~~~
   timeout: 60                           # 60 or any integer
+  db_cache:
   clean_bundles: false                  # false or true
   empty_trash: false                    # false or true
   optimize: false                       # false or true
-  db_cache:
-
+  verify_ssl:
 
 tmdb:                                   # REQUIRED for the script to run
   apikey: 9cea8d49d95~~~
@@ -230,17 +235,16 @@ tmdb:                                   # REQUIRED for the script to run
   region: KR                            # ISO 3166-1 Code of the User Region for Searches
   cache_expiration: 60                  # Number of days
 
-
 mdblist:
   apikey: cr8rn5~~~
   cache_expiration: 60
-
 
 trakt:
   client_id: 3d8bc~~~~
   client_secret: 268f~~~~
   pin: 318F~~~~
   authorization:
+    # everything below is autofilled by the script
     access_token:
     token_type:
     expires_in:
@@ -259,5 +263,5 @@ pmm 은 지정된 시간에 매일같이 라이브러리 정보를 업데이트�
 ```
 #!/bin/sh
 
-docker run --rm -it -v "./config:/config:rw" meisnate12/plex-meta-manager --config /config/config.yml --ignore-schedules --run
+docker run --rm -it -v "./config:/config:rw" kometateam/kometa --config /config/config.yml --ignore-schedules --run
 ```
