@@ -6,21 +6,15 @@ Plex Meta Manager Configuration
 ```
 /data/pmm/
 ├── config
+│   ├── assets\
+│   ├── logs\
+│   ├── overlays\
 │   ├── UUID
-│   ├── assets
-│   ├── config.yml
-│   ├── config.movie.foreign.yml
-│   ├── config.movie.kor.yml
-│   ├── config.movie.new-clear.yml
-│   ├── config.movie.new.yml
-│   ├── logs
-│   └── overlays
-├── docker-compose.yml
-├── pmm-run-movie-foreign.sh
-├── pmm-run-movie-kor.sh
-├── pmm-run-movie-new-clear.sh
-├── pmm-run-movie-new.sh
-└── pmm-run.sh
+│   ├── 1-1.sh
+│   ├── 1-2.sh
+│   ├── config.cache
+│   └── config.yml
+└── docker-compose.yml
 ```
 
 # docker-compose.yml
@@ -36,12 +30,10 @@ services:
     tty: true
     environment:
       - TZ=Asia/Seoul
-      - KOMETA_RUN=true
+      - KOMETA_CONFIG=/config/config.yml
       - KOMETA_DEBUG=true
       - KOMETA_LOG_REQUESTS=true
-      - KOMETA_CONFIG=/config/config.yml
-      - KOMETA_OVERLAYS_ONLY=true
-      - KOMETA_RUN=true
+      - KOMETA_SCHEDULE=03:00
     volumes:
       - ./config:/config
 ```
@@ -74,91 +66,90 @@ services:
 
 
 ```
-## This file is a template remove the .template to use the file
-
-## Required
 libraries:
-  1.1 영화(최근추가):
-#   schedule_overlays: weekly(sunday)
+  1-1 영화(최근추가):
     overlay_files:
-      - remove_overlays: false
-      - reapply_overlay: true
-      - default: commonsense
-      - default: resolution
-        template_variables:
-          use_dvhdrplus: false
-          use_dvhdr: false
-          use_plus: false
-          use_dv: false
-          use_hdr: false
-          use_576p: false
-          use_480p: false
-      - default: ribbon
-      - default: streaming
-      - default: ratings
-        template_variables:
-          rating1: user
-          rating1_image: rt_tomato
-          rating2: critic
-          rating2_image: imdb
-          rating3: audience
-          rating3_image: tmdb
-          horizontal_position: right
-
-  1.2 영화(외국):
-#   schedule_overlays: weekly(sunday)
-    overlay_files:
-      - remove_overlays: false
-      - reapply_overlay: true
-      - default: commonsense
-      - default: resolution
-        template_variables:
-          use_dvhdrplus: false
-          use_dvhdr: false
-          use_plus: false
-          use_dv: false
-          use_hdr: false
-          use_576p: false
-          use_480p: false
-      - default: ribbon
-      - default: streaming
-      - default: ratings
-        template_variables:
-          rating1: user
-          rating1_image: rt_tomato
-          rating2: critic
-          rating2_image: imdb
-          rating3: audience
-          rating3_image: tmdb
-          horizontal_position: right
+    - default: commonsense
+    - default: resolution
+    - default: ratings
+      template_variables:
+        rating1: user
+        rating1_image: rt_tomato
+        rating2: critic
+        rating2_image: imdb
+        rating3: audience
+        rating3_image: tmdb
+        horizontal_position: right
+    - default: streaming
+    - default: ribbon
 
 
-  1.3 영화(한국):
-#   schedule_overlays: weekly(sunday)
+  1-2 영화(외국):
     overlay_files:
-      - remove_overlays: false
-      - reapply_overlay: true
-      - default: commonsense
-      - default: resolution
-        template_variables:
-          use_dvhdrplus: false
-          use_dvhdr: false
-          use_plus: false
-          use_dv: false
-          use_hdr: false
-          use_576p: false
-          use_480p: false
-      - default: ribbon
-      - default: streaming
-      - default: ratings
-        template_variables:
-          rating1: user
-          rating1_image: rt_tomato
-          rating2: critic
-          rating2_image: imdb
-          rating3: audience
-          rating3_image: tmdb
-          horizontal_position: right
+    - default: commonsense
+    - default: resolution
+    - default: ratings
+      template_variables:
+        rating1: user
+        rating1_image: rt_tomato
+        rating2: critic
+        rating2_image: imdb
+        rating3: audience
+        rating3_image: tmdb
+        horizontal_position: right
+    - default: streaming
+    - default: ribbon
+
+
+  1-3 영화(한국):
+    overlay_files:
+    - default: commonsense
+    - default: resolution
+    - default: ratings
+      template_variables:
+        rating1: user
+        rating1_image: rt_tomato
+        rating2: critic
+        rating2_image: imdb
+        rating3: audience
+        rating3_image: tmdb
+        horizontal_position: right
+    - default: streaming
+    - default: ribbon
+
+
+  2-2 드라마(외국):
+    overlay_files:
+    - default: commonsense
+    - default: resolution
+    - default: ratings
+      template_variables:
+        rating1: user
+        rating1_image: rt_tomato
+        rating2: critic
+        rating2_image: imdb
+        rating3: audience
+        rating3_image: tmdb
+        horizontal_position: right
+    - default: streaming
+    - default: ribbon
+
+
+  2-3 드라마(한국):
+    overlay_files:
+    - default: commonsense
+    - default: resolution
+    - default: ratings
+      template_variables:
+        rating1: user
+        rating1_image: rt_tomato
+        rating2: critic
+        rating2_image: imdb
+        rating3: audience
+        rating3_image: tmdb
+        horizontal_position: right
+    - default: streaming
+    - default: ribbon
 
 
   operations:
@@ -223,7 +214,6 @@ plex:
   url: https://34-64-~~~.plex.direct:32400
   token: Ek4PJGxH~~~
   timeout: 60                           # 60 or any integer
-  db_cache:
   clean_bundles: false                  # false or true
   empty_trash: false                    # false or true
   optimize: false                       # false or true
@@ -239,22 +229,9 @@ mdblist:
   apikey: cr8rn5~~~
   cache_expiration: 60
 
-trakt:
-  client_id: 3d8bc~~~~
-  client_secret: 268f~~~~
-  pin: 318F~~~~
-  authorization:
-    # everything below is autofilled by the script
-    access_token:
-    token_type:
-    expires_in:
-    refresh_token:
-    scope:
-    created_at:
-
 ```
 
-# pmm-run.sh
+# 1-1.sh
 
 pmm 은 지정된 시간에 매일같이 라이브러리 정보를 업데이트합니다.
 
@@ -262,6 +239,5 @@ pmm 은 지정된 시간에 매일같이 라이브러리 정보를 업데이트�
 
 ```
 #!/bin/sh
-
-docker run --rm -it -v "./config:/config:rw" kometateam/kometa --config /config/config.yml --ignore-schedules --run
+python /kometa.py --config /config/config.yml --run --run-libraries '1-1 영화(최근추가)' --ignore-schedules
 ```
