@@ -237,6 +237,13 @@ pmm 은 지정된 시간에 매일같이 라이브러리 정보를 업데이트�
 
 수동으로 업데이트하기 위한 스크립트입니다.
 
+docker 내부에 접속해 shell 모드에서 실행하시면 됩니다.
+
+```
+$(local)# docker exec -it pmm bash
+root@pmm:/config# ./1-1.sh
+```
+
 ```
 #!/bin/sh
 python /kometa.py --config /config/config.yml --run --run-libraries '1-1 영화(최근추가)' --ignore-schedules
