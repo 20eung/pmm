@@ -1,7 +1,7 @@
 # pmm-config
 Plex Meta Manager Configuration
 
-# Tree
+## Tree
 
 ```
 /data/pmm/
@@ -17,7 +17,7 @@ Plex Meta Manager Configuration
 └── docker-compose.yml
 ```
 
-# docker-compose.yml
+## docker-compose.yml
 
 ```
 services:
@@ -39,7 +39,7 @@ services:
 ```
 
 
-# config.yml
+## config.yml
 
 > 설명:
 
@@ -260,7 +260,7 @@ mdblist:
 
 ```
 
-# 1-1.sh
+## 수동으로 실행하기
 
 pmm 은 지정된 시간에 매일같이 라이브러리 정보를 업데이트합니다.
 
