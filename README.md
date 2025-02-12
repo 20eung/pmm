@@ -68,10 +68,15 @@ services:
 ```
 libraries:
   1-1 영화(최근추가):
+    allow_custom_images: true           # 사용자 정의 이미지를 허용
     overlay_files:
-    - default: commonsense
-    - default: resolution
-    - default: ratings
+    - remove_overlays: false            # 오버레이를 제거하려면 true로 설정합니다.
+    - reapply_overlays: false           # 모든 오버레이를 강제로 다시 적용하려면 true로 설정합니다.
+    - default: ribbon                   # 차트 오버레이
+    - default: commonsense              # 콘텐츠 등급 오버레이
+    - default: resolution               # 미디어 해상도 오버레이
+    - default: streaming                # 프로덕션 스트리밍 오버레이
+    - default: ratings                  # 콘텐츠 평가 오버레이
       template_variables:
         rating1: user
         rating1_image: rt_tomato
@@ -80,15 +85,17 @@ libraries:
         rating3: audience
         rating3_image: tmdb
         horizontal_position: right
-    - default: streaming
-    - default: ribbon
-
 
   1-2 영화(외국):
+    allow_custom_images: true           # 사용자 정의 이미지를 허용
     overlay_files:
-    - default: commonsense
-    - default: resolution
-    - default: ratings
+    - remove_overlays: false            # 오버레이를 제거하려면 true로 설정합니다.
+    - reapply_overlays: false           # 모든 오버레이를 강제로 다시 적용하려면 true로 설정합니다.
+    - default: ribbon                   # 차트 오버레이
+    - default: commonsense              # 콘텐츠 등급 오버레이
+    - default: resolution               # 미디어 해상도 오버레이
+    - default: streaming                # 프로덕션 스트리밍 오버레이
+    - default: ratings                  # 콘텐츠 평가 오버레이
       template_variables:
         rating1: user
         rating1_image: rt_tomato
@@ -97,15 +104,17 @@ libraries:
         rating3: audience
         rating3_image: tmdb
         horizontal_position: right
-    - default: streaming
-    - default: ribbon
-
 
   1-3 영화(한국):
+    allow_custom_images: true           # 사용자 정의 이미지를 허용
     overlay_files:
-    - default: commonsense
-    - default: resolution
-    - default: ratings
+    - remove_overlays: false            # 오버레이를 제거하려면 true로 설정합니다.
+    - reapply_overlays: false           # 모든 오버레이를 강제로 다시 적용하려면 true로 설정합니다.
+    - default: ribbon                   # 차트 오버레이
+    - default: commonsense              # 콘텐츠 등급 오버레이
+    - default: resolution               # 미디어 해상도 오버레이
+    - default: streaming                # 프로덕션 스트리밍 오버레이
+    - default: ratings                  # 콘텐츠 평가 오버레이
       template_variables:
         rating1: user
         rating1_image: rt_tomato
@@ -114,15 +123,36 @@ libraries:
         rating3: audience
         rating3_image: tmdb
         horizontal_position: right
-    - default: streaming
-    - default: ribbon
 
+  2-1 드라마(기타):
+    allow_custom_images: true           # 사용자 정의 이미지를 허용
+    overlay_files:
+    - remove_overlays: false            # 오버레이를 제거하려면 true로 설정합니다.
+    - reapply_overlays: false           # 모든 오버레이를 강제로 다시 적용하려면 true로 설정합니다.
+    - default: ribbon                   # 차트 오버레이
+    - default: commonsense              # 콘텐츠 등급 오버레이
+    - default: resolution               # 미디어 해상도 오버레이
+    - default: streaming                # 프로덕션 스트리밍 오버레이
+    - default: ratings                  # 콘텐츠 평가 오버레이
+      template_variables:
+        rating1: user
+        rating1_image: rt_tomato
+        rating2: critic
+        rating2_image: imdb
+        rating3: audience
+        rating3_image: tmdb
+        horizontal_position: right
 
   2-2 드라마(외국):
+    allow_custom_images: true           # 사용자 정의 이미지를 허용
     overlay_files:
-    - default: commonsense
-    - default: resolution
-    - default: ratings
+    - remove_overlays: false            # 오버레이를 제거하려면 true로 설정합니다.
+    - reapply_overlays: false           # 모든 오버레이를 강제로 다시 적용하려면 true로 설정합니다.
+    - default: ribbon                   # 차트 오버레이
+    - default: commonsense              # 콘텐츠 등급 오버레이
+    - default: resolution               # 미디어 해상도 오버레이
+    - default: streaming                # 프로덕션 스트리밍 오버레이
+    - default: ratings                  # 콘텐츠 평가 오버레이
       template_variables:
         rating1: user
         rating1_image: rt_tomato
@@ -131,15 +161,17 @@ libraries:
         rating3: audience
         rating3_image: tmdb
         horizontal_position: right
-    - default: streaming
-    - default: ribbon
-
 
   2-3 드라마(한국):
+    allow_custom_images: true           # 사용자 정의 이미지를 허용
     overlay_files:
-    - default: commonsense
-    - default: resolution
-    - default: ratings
+    - remove_overlays: false            # 오버레이를 제거하려면 true로 설정합니다.
+    - reapply_overlays: false           # 모든 오버레이를 강제로 다시 적용하려면 true로 설정합니다.
+    - default: ribbon                   # 차트 오버레이
+    - default: commonsense              # 콘텐츠 등급 오버레이
+    - default: resolution               # 미디어 해상도 오버레이
+    - default: streaming                # 프로덕션 스트리밍 오버레이
+    - default: ratings                  # 콘텐츠 평가 오버레이
       template_variables:
         rating1: user
         rating1_image: rt_tomato
@@ -148,9 +180,6 @@ libraries:
         rating3: audience
         rating3_image: tmdb
         horizontal_position: right
-    - default: streaming
-    - default: ribbon
-
 
   operations:
     mass_user_rating_update: mdb_tomatoes
@@ -241,10 +270,5 @@ docker 내부에 접속해 shell 모드에서 실행하시면 됩니다.
 
 ```
 $(local)# docker exec -it pmm bash
-root@pmm:/config# ./1-1.sh
-```
-
-```
-#!/bin/sh
-python /kometa.py --config /config/config.yml --run --run-libraries '1-1 영화(최근추가)' --ignore-schedules
+root@pmm:/# python /kometa.py --config /config/config.yml --run --run-libraries '1-1 영화(최근추가)' --ignore-schedules
 ```
