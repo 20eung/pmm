@@ -284,7 +284,7 @@ root@pmm:/# python /kometa.py --config /config/config.yml --run --run-libraries 
 1. Docker Desktop 실행
 2. PMM 선택, 클릭
 3. Exec 탭 선택, 클릭
-4. # 프롬프트에서 아래 명령어 실행
+4. \# 프롬프트에서 아래 명령어 실행
 ```
 python /kometa.py --config /config/config.yml --run --run-libraries '1-1 영화(최근추가)' --ignore-schedules
 ```
