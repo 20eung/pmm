@@ -268,7 +268,24 @@ pmm 은 지정된 시간에 매일같이 라이브러리 정보를 업데이트�
 
 docker 내부에 접속해 shell 모드에서 실행하시면 됩니다.
 
+### 방법 1. 쉘 프롬프트에서(1)
+```
+docker run --rm -it -v "./config:/config:rw" kometateam/kometa --config /config/config.yml --run --run-libraries '1-1 영화(최근추가)' --ignore-schedules
+```
+
+### 방법 2. 쉘 프롬프트에서(2)
 ```
 $(local)# docker exec -it pmm bash
 root@pmm:/# python /kometa.py --config /config/config.yml --run --run-libraries '1-1 영화(최근추가)' --ignore-schedules
 ```
+
+### 방법 3. Windows에서
+
+1. Docker Desktop 실행
+2. PMM 선택, 클릭
+3. Exec 탭 선택, 클릭
+4. # 프롬프트에서 아래 명령어 실행
+```
+python /kometa.py --config /config/config.yml --run --run-libraries '1-1 영화(최근추가)' --ignore-schedules
+```
+
